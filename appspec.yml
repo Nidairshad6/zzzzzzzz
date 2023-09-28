@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/temp
+file_exists_behavior: OVERWRITE
+hooks:
+  AfterInstall:
+    - location: ci_scripts/deploy.sh
+      timeout: 600
+      runas: root
+  ApplicationStart:
+    - location: ci_scripts/start.sh
+      timeout: 100
+      runas: root
+  ValidateService:
+    - location: ci_scripts/remove_files
+      timeout: 100
+      runas: root

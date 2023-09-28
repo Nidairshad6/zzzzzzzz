@@ -1,6 +1,8 @@
 version: '3'
 services:
   web:
-    build: .
+    image: 875681151031.dkr.ecr.us-east-1.amazonaws.com/repo1:latest
+    
+    Containername: hello-container
     ports:
       - "3000:3000"

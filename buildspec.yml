@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+  
+  pre_build:
+
+    commands:
+      - echo logging in to AWS ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 875681151031.dkr.ecr.us-east-1.amazonaws.com
+
+   
+  build:
+ 
+    commands:
+    - echo "Creating build"
+    - docker build -t repo1 .
+    - docker tag repo1:latest 875681151031.dkr.ecr.us-east-1.amazonaws.com/repo1:latest
+    - docker push 875681151031.dkr.ecr.us-east-1.amazonaws.com/repo1:latest
+  
+  post_build:
+
+    commands: 
+
+artifacts:
+    files: 
+    - '**/*'
